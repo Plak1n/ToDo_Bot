@@ -9,4 +9,4 @@ async def tasks(tg_id):
     keyboard = InlineKeyboardBuilder()
     for task in tasks:
         keyboard.add(InlineKeyboardButton(text=task.task, callback_data=f"task_{task.id}"))
-    return keyboard.as_markup()
+    return keyboard.adjust(1).as_markup()
