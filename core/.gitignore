@@ -1,4 +1,5 @@
 config.txt
+db.sqlite3
 venv/
 Lib/
 __pycache__/
