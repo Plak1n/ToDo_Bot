@@ -1,8 +1,4 @@
 BOT_TOKEN = 7861010374:AAGJf73EN7y1ryH1wG7uRcbzPV6-QREhyu8
 BOT_OWNER_ID = 769391249
 
-DB_HOST=127.0.0.1
-DB_PORT=5432
-DB_NAME=users_aiogram
-DB_USER=plak1n
-DB_PASSWORD=Danko560x9z
+DB_URl=sqlite+aiosqlite:///db.sqlite3
