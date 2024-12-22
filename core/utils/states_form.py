@@ -8,3 +8,8 @@ class ToDoStates(StatesGroup):
     sharing_task = State()
     deleting_task = State()
 
+STATUS_OPTIONS = {
+    "not_started": "Не начата",
+    "in_progress": "В работе",
+    "completed": "Выполнена"
+}
