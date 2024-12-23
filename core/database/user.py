@@ -36,8 +36,6 @@ async def tasks(message: Message):
             f"📌 {task.task}",
             reply_markup=kb.create_task_keyboard(task.id)
         )
-        keyboard.add(InlineKeyboardButton(text=task.task, callback_data=f"task_{task.id}"))
-    return keyboard.adjust(1).as_markup()
 
 
 # @user.callback_query(F.data.startswith('task_'))
