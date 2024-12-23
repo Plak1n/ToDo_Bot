@@ -2,14 +2,6 @@ from aiogram.types import (ReplyKeyboardMarkup, KeyboardButton,
                            InlineKeyboardMarkup, InlineKeyboardButton)
 from aiogram.utils.keyboard import ReplyKeyboardBuilder, InlineKeyboardBuilder
 
-from core.database.requests import get_tasks
-
-async def tasks(tg_id):
-    tasks = await get_tasks(tg_id)
-    keyboard = InlineKeyboardBuilder()
-    for task in tasks:
-        keyboard.add(InlineKeyboardButton(text=task.task, callback_data=f"task_{task.id}"))
-    return keyboard.adjust(1).as_markup()
 
 def create_main_menu():
     return ReplyKeyboardMarkup(
@@ -20,3 +12,11 @@ def create_main_menu():
         ],
         resize_keyboard=True
     )
+
+
+def create_task_keyboard(task_id):
+    return InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text="✏ Редактировать", callback_data=f"edit_{task_id}")],
+        [InlineKeyboardButton(text="🔄 Изменить статус", callback_data=f"status_{task_id}")],
+        [InlineKeyboardButton(text="✅ Завершить", callback_data=f"done_{task_id}")]
+    ])

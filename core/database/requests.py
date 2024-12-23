@@ -2,6 +2,7 @@ from core.database.models import async_session
 from core.database.models import User, Task
 from sqlalchemy import select, update, delete, desc
 
+import time
 
 async def set_user(tg_id):
     async with async_session() as session:
