@@ -10,3 +10,13 @@ async def tasks(tg_id):
     for task in tasks:
         keyboard.add(InlineKeyboardButton(text=task.task, callback_data=f"task_{task.id}"))
     return keyboard.adjust(1).as_markup()
+
+def create_main_menu():
+    return ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text="➕ Добавить задачу"), KeyboardButton(text="📋 Показать задачи")],
+            [KeyboardButton(text="✅ Выполненные задачи"), KeyboardButton(text="❌ Удалить задачу")],
+            [KeyboardButton(text="🔗 Поделиться задачами")]
+        ],
+        resize_keyboard=True
+    )
