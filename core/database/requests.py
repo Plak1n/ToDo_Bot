@@ -21,11 +21,12 @@ async def get_tasks(tg_id):
         return tasks  
 
 
-async def set_task(tg_id, task):
+async def add_task(tg_id, task:dict):
     async with async_session() as session:
         user = await session.scalar(select(User).where(User.tg_id == tg_id))
-        session.add(Task(task=task, user=user.id))
+        session.add(Task(task=task['task'], status=task['status'], timestamp=task['timestamp'], user=user.id))
         await session.commit()
+
 
 async def del_task(task_id):
     async with async_session() as session:

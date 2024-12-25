@@ -6,6 +6,7 @@ from aiogram.enums import ContentType, ParseMode
 from aiogram.types import Message
 from aiogram.filters import Command
 from aiogram.client.default import DefaultBotProperties
+from aiogram.fsm.storage.memory import MemoryStorage
 from core.settings import settings
 from core.handlers.basic import start_bot, stop_bot
 from core.database.user import user
@@ -14,7 +15,7 @@ from core.utils.commands import set_commands
 
 asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
-dp = Dispatcher()
+dp = Dispatcher(storage=MemoryStorage())
 
 @dp.message(Command("help"))
 async def help(message: Message):
