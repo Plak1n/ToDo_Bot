@@ -1,8 +1,7 @@
 from core.database.models import async_session
 from core.database.models import User, Task
-from sqlalchemy import select, update, delete, desc
+from sqlalchemy import select, update, delete, desc, func
 
-import time
 
 async def set_user(tg_id):
     async with async_session() as session:
@@ -19,6 +18,15 @@ async def get_tasks(tg_id):
         tasks = await session.scalars(select(Task).where(Task.user == user.id))
         
         return tasks  
+
+
+async def task_count(tg_id):
+    async with async_session() as session:
+        user = await session.scalar(select(User).where(User.tg_id == tg_id))
+        if not user:
+            return 0
+
+        return await session.scalar(select(func.count(Task.id)).where(Task.user == user.id))
 
 
 async def add_task(tg_id, task:dict):

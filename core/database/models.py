@@ -28,7 +28,7 @@ class Task(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     task: Mapped[str] = mapped_column(String(100))
     status: Mapped[str] = mapped_column(String(50), default="Не выполнена")
-    timestamp: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone('Europe/Moscow')))
+    timestamp: Mapped[datetime] = mapped_column(DateTime, default=lambda: (datetime.now(timezone('Europe/Moscow'))).replace(microsecond=0))
     completed_at: Mapped[datetime] = mapped_column(DateTime, nullable=True)
     user:Mapped[int] = mapped_column(ForeignKey('users.id'))
 
