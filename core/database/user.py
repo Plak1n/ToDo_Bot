@@ -6,7 +6,7 @@ from aiogram.types import (ReplyKeyboardMarkup, KeyboardButton,
                            InlineKeyboardMarkup, InlineKeyboardButton)
 from aiogram.fsm.context import FSMContext
 from core.database.requests import set_user, add_task, del_task, task_count
-from core.database.requests import get_tasks
+from core.database.requests import get_tasks, check_task_status
 from core.utils.states_form import ToDoStates, STATUS_OPTIONS
 # from middlewares import BaseMiddleware
 import core.keyboards.keyboards as kb
@@ -91,3 +91,25 @@ async def process_delete_task(message: Message, state: FSMContext):
     except (IndexError, ValueError):
         await message.answer("❌ Неверный формат ввода. Пожалуйста, введите числовой номер задачи.", reply_markup=kb.create_main_menu())
     await state.clear()
+
+
+@user.message(lambda msg: msg.text == "✅ Выполненные задачи")
+async def show_completed_tasks(message: Message):
+    tasks = await get_tasks(message.from_user.id)
+    completed_tasks = []
+    if not tasks:
+        await message.answer("📭 Нет выполненных задач или список задач не найден.", reply_markup=kb.create_main_menu())
+        return
+    keyboard = InlineKeyboardBuilder()
+    for task in tasks:
+        status = await check_task_status(task.id)
+        if status == STATUS_OPTIONS["completed"]:
+            completed_tasks.append(task)
+            await message.answer(
+            f"{task.id} {task.task}",
+            reply_markup=kb.create_task_keyboard(task.id)
+        )
+    
+    if not completed_tasks:
+        await message.answer("📭 В этом списке нет выполненных задач.")
+        return
