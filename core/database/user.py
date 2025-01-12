@@ -37,7 +37,7 @@ async def tasks(message: Message):
     keyboard = InlineKeyboardBuilder()
     for task in tasks:
         await message.answer(
-            f"{task.id} {task.task}",
+            f"№{task.id} {task.task}\nСтатус: {task.status}\n🕒 {task.timestamp}",
             reply_markup=kb.create_task_keyboard(task.id)
         )
 
@@ -106,7 +106,7 @@ async def show_completed_tasks(message: Message):
         if status == STATUS_OPTIONS["completed"]:
             completed_tasks.append(task)
             await message.answer(
-            f"{task.id} {task.task}",
+            f"№{task.id} {task.task}\nСтатус: {task.status}\n🕒 {task.timestamp}",
             reply_markup=kb.create_task_keyboard(task.id)
         )
     

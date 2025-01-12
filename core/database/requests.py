@@ -55,3 +55,9 @@ async def check_task_status(task_id):
             return
         
         return task.status
+
+
+async def change_task(task_id, task_text):
+    async with async_session() as session:
+        await session.execute(delete(Task).where(Task.id == task_id))
+        await session.commit()
