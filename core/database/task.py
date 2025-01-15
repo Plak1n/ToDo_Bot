@@ -40,3 +40,26 @@ async def editing_task(message: Message, state: FSMContext):
         await state.clear()   
     
     await state.clear()
+
+@task.callback_query(lambda call: call.data.startswith("status"))
+async def change_status(callback: CallbackQuery, state: FSMContext):
+    _, task_id = callback.data.split("_")
+    await state.set_state(ToDoStates.changing_status)
+    await state.update_data(task_id=int(task_id))
+    await callback.message.answer("Выберите новый статус задачи:", reply_markup=kb.create_status_keyboard(task_id))
+
+
+@task.message(ToDoStates.changing_status)
+async def changing_status(callback: CallbackQuery, state: FSMContext):
+    data = await state.get_data()
+    task_id = data.get("task_id")
+    new_task = callback.message.strip()
+    
+    # if task_id:
+    #     await change_task(task_id,new_task)
+    #     await message.answer("✅ Задача обновлена", reply_markup=kb.create_main_menu())
+    # else:
+    #     await message.answer("❌ Список задач не найден. Пожалуйста, перезапустите бота командой /start.", reply_markup=kb.create_main_menu())
+    #     await state.clear()
+    
+    # await state.clear()

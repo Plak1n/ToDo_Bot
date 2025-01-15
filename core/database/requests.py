@@ -94,3 +94,17 @@ async def change_task(task_id, task_text):
         except SQLAlchemyError as e:
             print(f"An error occurred in change_task: {e}")
             await session.rollback()
+
+
+async def change_stauts(task_id, task_status):
+    async with async_session() as session:
+        try:
+            await session.execute(
+                update(Task)
+                .where(Task.id == task_id)
+                .values(status=task_status)
+            )
+            await session.commit()
+        except SQLAlchemyError as e:
+            print(f"An error occurred in change_task: {e}")
+            await session.rollback()

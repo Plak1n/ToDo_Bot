@@ -7,8 +7,8 @@ def create_main_menu():
     return ReplyKeyboardMarkup(
         keyboard=[
             [KeyboardButton(text="➕ Добавить задачу"), KeyboardButton(text="📋 Показать задачи")],
-            [KeyboardButton(text="✅ Выполненные задачи"), KeyboardButton(text="❌ Удалить задачу")],
-            [KeyboardButton(text="🔗 Поделиться задачами")]
+            [KeyboardButton(text="✅ Выполненные задачи"), KeyboardButton(text="❌ Удалить задачу")]
+            # [KeyboardButton(text="🔗 Поделиться задачами")]
         ],
         resize_keyboard=True
     )
