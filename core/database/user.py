@@ -113,3 +113,10 @@ async def show_completed_tasks(message: Message):
     if not completed_tasks:
         await message.answer("📭 В этом списке нет выполненных задач.")
         return
+
+# @user.callback_query(lambda call: call.data.startswith("edit"))
+# async def change_task(callback: CallbackQuery, state: FSMContext):
+#     _, task_id = callback.data.split("_")
+#     await state.set_state(ToDoStates.editing_task)
+#     await state.update_data(task_id=int(task_id))
+#     await callback.message.answer("Введите новый текст задачи:")

@@ -10,6 +10,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from core.settings import settings
 from core.handlers.basic import start_bot, stop_bot
 from core.database.user import user
+from core.database.task import task
 from core.database.models import async_main
 from core.utils.commands import set_commands
 
@@ -34,7 +35,7 @@ async def main():
      
     bot = Bot(token=settings.bots.bot_token, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
     
-    dp.include_routers(user)
+    dp.include_routers(user,task)
     dp.startup.register(start_bot)
     dp.shutdown.register(stop_bot)
     
