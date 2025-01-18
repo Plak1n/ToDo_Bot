@@ -116,11 +116,14 @@ async def change_status(task_id, task_status):
 async def mark_done(task_id):
     async with async_session() as session:
         try:
+            time = datetime.now(timezone('Europe/Moscow')).replace(microsecond=0)
+            print(time)
             await session.execute(
                 update(Task)
                 .where(Task.id == task_id)
-                .values(completed_at=lambda: (datetime.now(timezone('Europe/Moscow'))).replace(microsecond=0))
+                .values(completed_at=time, status="Выполнена") 
             )
+            await session.commit() 
         except SQLAlchemyError as e:
             print(f"An error occurred in change_task: {e}")
             await session.rollback()

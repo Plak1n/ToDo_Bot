@@ -106,7 +106,7 @@ async def show_completed_tasks(message: Message):
         if status == STATUS_OPTIONS["completed"]:
             completed_tasks.append(task)
             await message.answer(
-            f"№{task.id} {task.task}\nСтатус: {task.status}\n🕒 {task.timestamp} {task.completed_at}",
+            f"№{task.id} {task.task}\nСтатус: {task.status}\n🕒 {task.timestamp}\n✅ {task.completed_at}",
             reply_markup=kb.create_task_keyboard(task.id)
         )
     
