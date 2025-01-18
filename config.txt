@@ -1,4 +1,0 @@
-BOT_TOKEN = 7861010374:AAGJf73EN7y1ryH1wG7uRcbzPV6-QREhyu8
-BOT_OWNER_ID = 769391249
-
-DB_URl=sqlite+aiosqlite:///db.sqlite3
