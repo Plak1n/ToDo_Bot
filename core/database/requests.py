@@ -96,7 +96,7 @@ async def change_task(task_id, task_text):
             await session.rollback()
 
 
-async def change_stauts(task_id, task_status):
+async def change_status(task_id, task_status):
     async with async_session() as session:
         try:
             await session.execute(

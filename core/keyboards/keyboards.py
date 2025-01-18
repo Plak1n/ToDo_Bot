@@ -4,11 +4,11 @@ from aiogram.utils.keyboard import ReplyKeyboardBuilder, InlineKeyboardBuilder
 
 
 def create_main_menu():
+     # [KeyboardButton(text="🔗 Поделиться задачами")]
     return ReplyKeyboardMarkup(
         keyboard=[
             [KeyboardButton(text="➕ Добавить задачу"), KeyboardButton(text="📋 Показать задачи")],
             [KeyboardButton(text="✅ Выполненные задачи"), KeyboardButton(text="❌ Удалить задачу")]
-            # [KeyboardButton(text="🔗 Поделиться задачами")]
         ],
         resize_keyboard=True
     )
@@ -23,7 +23,7 @@ def create_task_keyboard(task_id):
 
 def create_status_keyboard(task_id):
     return InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text="Не начата", callback_data=f"set_status_{task_id}_not_started")],
-        [InlineKeyboardButton(text="В работе", callback_data=f"set_status_{task_id}_in_progress")],
-        [InlineKeyboardButton(text="Выполнена", callback_data=f"set_status_{task_id}_completed")]
+        [InlineKeyboardButton(text="Не начата", callback_data=f"setstatus_{task_id}_not_started")],
+        [InlineKeyboardButton(text="В работе", callback_data=f"setstatus_{task_id}_in_progress")],
+        [InlineKeyboardButton(text="Выполнена", callback_data=f"setstatus_{task_id}_completed")]
     ])
